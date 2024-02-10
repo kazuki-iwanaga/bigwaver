@@ -15,3 +15,5 @@ jobs:
           reporter: github-pr-review
           filter_mode: nofilter
           tflint_config: ${{ github.workspace }}/terraform/.tflint.hcl
+          flags: --recursive
+          working_directory: ${{ github.workspace }}/terraform
