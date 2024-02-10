@@ -14,3 +14,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-review
           filter_mode: nofilter
+          tflint_config: ${{ github.workspace }}/terraform/.tflint.hcl
