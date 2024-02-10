@@ -17,3 +17,4 @@ jobs:
           tflint_config: ${{ github.workspace }}/terraform/.tflint.hcl
           flags: --recursive
           working_directory: terraform
+          level: info
