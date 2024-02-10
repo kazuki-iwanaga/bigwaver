@@ -40,12 +40,21 @@ jobs:
       - name: terraform fmt
         run: |
           terraform fmt -check -recursive
+      # tflint
+      # https://github.com/terraform-linters/setup-tflint
+      - uses: terraform-linters/setup-tflint@v3
+      - run: tflint --init
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - run: tflint -f compact
       - name: tflint
         run: |
-          echo ${{ github.action_path }}
-          docker run --rm -v $(pwd):/data -t ghcr.io/terraform-linters/tflint
-      - name: tfsec
-        uses: aquasecurity/tfsec-action@v1.0.0
+          docker run --rm -v ${{ github.workspace }}/terraform$(pwd):/data -t ghcr.io/terraform-linters/tflint
+      # tfsec
+      # https://github.com/aquasecurity/tfsec-pr-commenter-action
+      - uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
+        with:
+          github_token: ${{ github.token }}
   terraform-plan:
     if: github.event_name == 'pull_request'
     environment: stg
