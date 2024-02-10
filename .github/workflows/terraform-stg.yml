@@ -75,3 +75,36 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |-
           tfcmt plan -- terraform plan -no-color
+  terraform-apply:
+    if: github.event_name == 'push'
+    environment: stg
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+    defaults:
+      run:
+        working-directory: terraform/stg
+    steps:
+      - uses: actions/checkout@v4
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_WIF_SERVICE_ACCOUNT }}
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+      - name: terraform init
+        run: |
+          terraform init -backend-config="bucket=${{ vars.TF_BACKEND_BUCKET }}"
+      - name: setup tfcmt
+        run: |
+          wget "https://github.com/suzuki-shunsuke/tfcmt/releases/download/v4.8.0/tfcmt_linux_amd64.tar.gz" -O /tmp/tfcmt.tar.gz
+          tar xzf /tmp/tfcmt.tar.gz -C /tmp
+          mv /tmp/tfcmt /usr/local/bin
+      - name: terraform apply
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |-
+          tfcmt apply -- terraform apply -auto-approve -no-color
