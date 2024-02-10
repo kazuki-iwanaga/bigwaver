@@ -42,6 +42,7 @@ jobs:
           terraform fmt -check -recursive
       - name: tflint
         run: |
+          echo ${{ github.action_path }}
           docker run --rm -v $(pwd):/data -t ghcr.io/terraform-linters/tflint
       - name: tfsec
         uses: aquasecurity/tfsec-action@v1.0.0
