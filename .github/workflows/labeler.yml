@@ -2,6 +2,8 @@
 name: labeler
 on:
   pull_request:
+    branches:
+      - main
 jobs:
   labeler:
     runs-on: ubuntu-latest
