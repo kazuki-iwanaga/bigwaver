@@ -52,7 +52,8 @@ jobs:
       - uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
         with:
           github_token: ${{ github.token }}
-          working_directory: terraform/stg
+          # https://github.com/aquasecurity/tfsec-pr-commenter-action/issues/90
+          working_directory: ''
   terraform-plan:
     if: github.event_name == 'pull_request'
     environment: stg
