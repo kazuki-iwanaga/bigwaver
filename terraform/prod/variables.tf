@@ -1,6 +1,7 @@
 variable "gcp_project_id" {
   type        = string
   description = "GCP Project ID"
+  default     = "bigwaver"
 }
 
 variable "gcp_region" {
@@ -12,4 +13,5 @@ variable "gcp_region" {
 variable "gh_repository" {
   type        = string
   description = "The GitHub repository name like OWNER/REPO"
+  default     = "kazuki-iwanaga/bigwaver"
 }
