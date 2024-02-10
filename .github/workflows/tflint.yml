@@ -15,4 +15,4 @@ jobs:
           reporter: github-pr-review
           flags: --recursive
           level: info
-          tflint_config: terrform/.tflint.hcl
+          tflint_config: ${{ github.workspace }}/terrform/.tflint.hcl
