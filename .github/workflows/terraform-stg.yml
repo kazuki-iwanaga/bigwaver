@@ -44,14 +44,13 @@ jobs:
       # https://github.com/terraform-linters/setup-tflint
       - uses: terraform-linters/setup-tflint@v3
       - run: tflint --init
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: tflint -f compact
       # tfsec
       # https://github.com/aquasecurity/tfsec-pr-commenter-action
       - uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          working_directory: terraform/stg
   terraform-plan:
     if: github.event_name == 'pull_request'
     environment: stg
