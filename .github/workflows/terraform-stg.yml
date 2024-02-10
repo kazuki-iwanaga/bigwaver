@@ -47,9 +47,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - run: tflint -f compact
-      - name: tflint
-        run: |
-          docker run --rm -v ${{ github.workspace }}/terraform$(pwd):/data -t ghcr.io/terraform-linters/tflint
       # tfsec
       # https://github.com/aquasecurity/tfsec-pr-commenter-action
       - uses: aquasecurity/tfsec-pr-commenter-action@v1.2.0
