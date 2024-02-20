@@ -1,0 +1,15 @@
+# https://github.com/actions/labeler
+name: labeler
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/labeler@v5

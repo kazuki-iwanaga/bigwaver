@@ -1,0 +1,12 @@
+prod>terraform:
+  - all:
+      - changed-files:
+          - any-glob-to-any-file:
+              - terraform/prod/**
+      - base-branch: main
+stg>terraform:
+  - all:
+      - changed-files:
+          - any-glob-to-any-file:
+              - terraform/stg/**
+      - base-branch: main

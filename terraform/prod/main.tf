@@ -5,9 +5,11 @@ module "gh_actions" {
   gh_repository  = var.gh_repository
 }
 
+# tfsec:ignore:google-iam-no-privileged-service-accounts
 resource "google_project_iam_member" "github_actions" {
   for_each = toset([
-    "roles/viewer"
+    "roles/owner",
+    "roles/resourcemanager.projectIamAdmin"
   ])
 
   project = var.gcp_project_id

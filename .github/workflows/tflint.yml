@@ -1,0 +1,20 @@
+name: tflint
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/tflint.yml'
+      - '**/**.tf'
+jobs:
+  tflint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: reviewdog/action-tflint@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-pr-review
+          filter_mode: nofilter
+          tflint_config: ${{ github.workspace }}/terraform/.tflint.hcl
+          flags: --recursive
+          working_directory: terraform
+          level: info

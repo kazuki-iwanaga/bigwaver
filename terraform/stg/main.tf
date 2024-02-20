@@ -7,7 +7,8 @@ module "gh_actions" {
 
 resource "google_project_iam_member" "github_actions" {
   for_each = toset([
-    "roles/viewer"
+    "roles/owner",
+    "roles/resourcemanager.projectIamAdmin"
   ])
 
   project = var.gcp_project_id
