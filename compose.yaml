@@ -1,0 +1,10 @@
+services:
+  rath:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rath
+    image: rath
+    ports:
+      - 3000:3000
+    command: sleep infinity
