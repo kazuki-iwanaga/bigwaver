@@ -18,7 +18,7 @@ services:
       - go-modules:/go/pkg
       - go-buildcache:/root/.cache/go-build
       - /Users/iwanaga/.config/gcloud/application_default_credentials.json:/root/.config/gcloud/application_default_credentials.json
-    # command: sleep infinity
+      # command: sleep infinity
 volumes:
   go-modules:
   go-buildcache:
