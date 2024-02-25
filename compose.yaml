@@ -1,0 +1,21 @@
+services:
+  app:
+    container_name: app
+    image: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: develop
+    tty: true
+    environment:
+      - SECRET=It's a Secret to Everybody
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app
+      - go-modules:/go/pkg
+      - go-buildcache:/root/.cache/go-build
+    command: sleep infinity
+volumes:
+  go-modules:
+  go-buildcache:
