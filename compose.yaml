@@ -5,17 +5,20 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: develop
+      # target: builder
     tty: true
     environment:
       - SECRET=It's a Secret to Everybody
+      - PROJECT=iwanaga-experimental
+      - TOPIC=test-topic
     ports:
       - 8080:8080
     volumes:
-      - .:/app
+      # - .:/app
       - go-modules:/go/pkg
       - go-buildcache:/root/.cache/go-build
-    command: sleep infinity
+      - /Users/iwanaga/.config/gcloud/application_default_credentials.json:/root/.config/gcloud/application_default_credentials.json
+    # command: sleep infinity
 volumes:
   go-modules:
   go-buildcache:
