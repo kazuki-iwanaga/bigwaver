@@ -1,0 +1,6 @@
+- id: github
+  execute-command: /app/hooks.sh
+  command-working-directory: /app
+  pass-environment-to-command:
+    - source: entire-payload
+      envname: PAYLOAD
