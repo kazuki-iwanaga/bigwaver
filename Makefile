@@ -19,3 +19,11 @@ in:
 .PHONY: ps
 ps:
 	$(DC) ps
+
+.PHONY: logs
+logs:
+	$(DC) logs
+
+.PHONY: test
+test:
+	curl -X POST -H "Content-Type: application/json" -d '{"header1":"header1","data":{"header2":"header2"}}' localhost:8080/hooks/github
