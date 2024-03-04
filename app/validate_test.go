@@ -5,8 +5,6 @@ import (
 )
 
 func TestGenerateHMAC(t *testing.T) {
-	t.Helper()
-
 	cases := map[string]struct {
 		secret   string
 		message  string
@@ -26,14 +24,16 @@ func TestGenerateHMAC(t *testing.T) {
 		},
 	}
 
-	for _, c := range cases {
-		actual := generateHMAC(c.secret, c.message)
-		if actual != c.expected {
-			t.Errorf(
-				"generateHMAC(%s, %s): expected %s, actual %s",
-				c.secret, c.message, c.expected, actual,
-			)
-		}
+	for k, c := range cases {
+		t.Run(k, func(t *testing.T) {
+			actual := generateHMAC(c.secret, c.message)
+			if actual != c.expected {
+				t.Errorf(
+					"generateHMAC(%s, %s): expected %s, actual %s",
+					c.secret, c.message, c.expected, actual,
+				)
+			}
+		})
 	}
 }
 
@@ -55,13 +55,15 @@ func TestIsSameSignature(t *testing.T) {
 		},
 	}
 
-	for _, c := range cases {
-		actual := isSameSignature(c.signatureA, c.signatureB)
-		if actual != c.expected {
-			t.Errorf(
-				"isSameSignature(%s, %s): expected %t, actual %t",
-				c.signatureA, c.signatureB, c.expected, actual,
-			)
-		}
+	for k, c := range cases {
+		t.Run(k, func(t *testing.T) {
+			actual := isSameSignature(c.signatureA, c.signatureB)
+			if actual != c.expected {
+				t.Errorf(
+					"isSameSignature(%s, %s): expected %t, actual %t",
+					c.signatureA, c.signatureB, c.expected, actual,
+				)
+			}
+		})
 	}
 }
