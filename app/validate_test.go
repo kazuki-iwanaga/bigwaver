@@ -5,6 +5,8 @@ import (
 )
 
 func TestGenerateHMAC(t *testing.T) {
+	t.Helper()
+
 	patterns := []struct {
 		secret   string
 		message  string
