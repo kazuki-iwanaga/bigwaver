@@ -1,0 +1,23 @@
+services:
+  app:
+    container_name: app
+    image: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    environment:
+      - GOCACHE=${GOCACHE}
+      - GOMODCACHE=${GOMODCACHE}
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app
+      - GOCACHE:${GOCACHE}
+      - GOMODCACHE:${GOMODCACHE}
+    working_dir: /app
+    tty: true
+    command: sleep infinity
+volumes:
+  GOCACHE:
+  GOMODCACHE:
